@@ -1,5 +1,5 @@
 const recipes = require('express').Router()
-const Recipes = require('../models/recipes.js')
+const Recipe = require('../models/recipes.js')
 
 // Index route  - show recipes
 recipes.get('/', (req, res) => {
