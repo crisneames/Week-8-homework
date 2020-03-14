@@ -19,6 +19,7 @@ class App extends Component {
         }
         this.getRecipes = this.getRecipes.bind(this)
         this.handleAddRecipe = this.handleAddRecipe.bind(this)
+        this.deleteRecipe = this.deleteRecipe.bind(this)
     }
     componentDidMount(){
         this.getRecipes()
@@ -38,6 +39,22 @@ class App extends Component {
             console.error(e);
         }
     }
+
+    async deleteRecipe(id) {
+      console.log(`I made a delete request to here: ${baseUrl}/recipes/${id}`)
+      try {
+        let response = await fetch(baseUrl + '/recipes/' + id, {
+          method: 'DELETE'
+        })
+        let data = await response.json()
+        const foundRecipe = this.state.recipes.findIndex(recipe => recipe._id === id)
+        const copyRecipes = [...this.state.recipes]
+        copyRecipes.splice(foundRecipe, 1)
+        this.setState({recipes: copyRecipes})
+      } catch (error) {
+        console.error(error)
+      }
+    }
   render () {
       console.log(this.state.recipes);
     return (
@@ -48,9 +65,10 @@ class App extends Component {
             {
                 this.state.recipes.map(recipe => {
                     return (
-                        <li key={recipe._id}>
+                        <li key={recipe._id} id={recipe._id}>
                             <h2>{recipe.name}</h2>
                             <h3>Category: {recipe.category}</h3>
+                            <h4 onClick={()=> {this.deleteRecipe(recipe._id)}}>X</h4>
                         </li>
                     )
                 })
