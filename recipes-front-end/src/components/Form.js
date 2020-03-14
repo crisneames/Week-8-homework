@@ -40,9 +40,9 @@ class Form extends Component {
   render () {
     return (
       <form onSubmit={this.handleSubmit}>
-        <input type="text" id="name" onChange={this.handleChange} placeholder="Name"/>
-        <input type="text" id="category"  onChange={this.handleChange} placeholder="Category"/>
-        <textarea type="text" id="directions"  onChange={this.handleChange} placeholder="Instructions"/>
+        <input type="text" id="name" onChange={this.handleChange} placeholder="Name" value={this.state.name}/>
+        <input type="text" id="category"  onChange={this.handleChange} placeholder="Category" value={this.state.category}/>
+        <textarea type="text" id="description"  onChange={this.handleChange} placeholder="Instructions" value={this.state.description}/>
         <input type="submit" value="Add Recipe" />
       </form>
     )
