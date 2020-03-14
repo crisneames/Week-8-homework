@@ -18,9 +18,16 @@ class App extends Component {
             recipes: []
         }
         this.getRecipes = this.getRecipes.bind(this)
+        this.handleAddRecipe = this.handleAddRecipe.bind(this)
     }
     componentDidMount(){
         this.getRecipes()
+    }
+    handleAddRecipe(recipe) {
+        const copyRecipes = [recipe, ...this.state.recipes]
+        this.setState({
+            recipes: copyRecipes,
+        })
     }
     async getRecipes(){
         try {
@@ -36,7 +43,7 @@ class App extends Component {
     return (
       <div>
         <h1>Recipes</h1>
-        <Form />
+        <Form handleAddRecipe={this.handleAddRecipe} recipes={this.state.recipes} baseUrl={baseUrl} />
         <ul>
             {
                 this.state.recipes.map(recipe => {
