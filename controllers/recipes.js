@@ -1,5 +1,5 @@
 const recipes = require('express').Router()
-const Recipes = require('../models/recipes.js')
+const Recipe = require('../models/recipes.js')
 
 // Index route  - show recipes
 recipes.get('/', (req, res) => {
@@ -13,11 +13,10 @@ recipes.get('/', (req, res) => {
 
 
 // Create route
-recipes.post('/', async(req, res)  => {
+recipes.post('/', (req, res)  => {
   Recipe.create(req.body, (error, createdRecipe) => {
     if(error) {
       res.status(400).json({error: error.message})
-
     }
     res.status(200).send(createdRecipe)
   })
