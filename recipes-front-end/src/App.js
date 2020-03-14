@@ -66,7 +66,7 @@ class App extends Component {
   render () {
       console.log(this.state.recipes);
     return (
-      <div>
+      <div className="main-container">
         <h1>Recipes</h1>
         <Form handleAddRecipe={this.handleAddRecipe} recipes={this.state.recipes} baseUrl={baseUrl} />
         <ul>
@@ -74,15 +74,17 @@ class App extends Component {
                 this.state.recipes.map(recipe => {
                     return (
                         <li key={recipe._id} id={recipe._id}>
+                        <div className="recipe-name">
                             <h2>{recipe.name}</h2>
                             <h3>Category: {recipe.category}</h3>
+                            <h4 id="delete" onClick={()=> {this.deleteRecipe(recipe._id)}}>X</h4>
+                        </div>
                             <button onClick={this.toggleInstructions}>Get Instructions</button>
                             {
                                 this.state.instructions
                                 ? <h4>{recipe.description}</h4>
                                 : null
                             }
-                            <h4 onClick={()=> {this.deleteRecipe(recipe._id)}}>X</h4>
                         </li>
                     )
                 })
