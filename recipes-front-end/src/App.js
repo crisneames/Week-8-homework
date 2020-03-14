@@ -15,11 +15,13 @@ class App extends Component {
     constructor (props){
         super(props)
         this.state = {
-            recipes: []
+            recipes: [],
+            instructions: false
         }
         this.getRecipes = this.getRecipes.bind(this)
         this.handleAddRecipe = this.handleAddRecipe.bind(this)
         this.deleteRecipe = this.deleteRecipe.bind(this)
+        this.toggleInstructions = this.toggleInstructions.bind(this)
     }
     componentDidMount(){
         this.getRecipes()
@@ -28,6 +30,7 @@ class App extends Component {
         const copyRecipes = [recipe, ...this.state.recipes]
         this.setState({
             recipes: copyRecipes,
+            instructions: false
         })
     }
     async getRecipes(){
@@ -46,7 +49,7 @@ class App extends Component {
         let response = await fetch(baseUrl + '/recipes/' + id, {
           method: 'DELETE'
         })
-        let data = await response.json()
+        await response.json()
         const foundRecipe = this.state.recipes.findIndex(recipe => recipe._id === id)
         const copyRecipes = [...this.state.recipes]
         copyRecipes.splice(foundRecipe, 1)
@@ -55,6 +58,11 @@ class App extends Component {
         console.error(error)
       }
     }
+
+    async toggleInstructions() {
+        this.setState({instructions: !this.state.instructions})
+    }
+
   render () {
       console.log(this.state.recipes);
     return (
@@ -68,6 +76,12 @@ class App extends Component {
                         <li key={recipe._id} id={recipe._id}>
                             <h2>{recipe.name}</h2>
                             <h3>Category: {recipe.category}</h3>
+                            <button onClick={this.toggleInstructions}>Get Instructions</button>
+                            {
+                                this.state.instructions
+                                ? <h4>{recipe.description}</h4>
+                                : null
+                            }
                             <h4 onClick={()=> {this.deleteRecipe(recipe._id)}}>X</h4>
                         </li>
                     )
