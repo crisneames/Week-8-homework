@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import Form from './components/Form.js'
 
 let baseUrl = ''
 
@@ -36,6 +36,7 @@ class App extends Component {
     return (
       <div>
         <h1>Recipes</h1>
+        <Form />
         <ul>
             {
                 this.state.recipes.map(recipe => {
