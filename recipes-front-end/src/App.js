@@ -16,7 +16,7 @@ class App extends Component {
         super(props)
         this.state = {
             recipes: [],
-            instructions: false
+            view: false
         }
         this.getRecipes = this.getRecipes.bind(this)
         this.handleAddRecipe = this.handleAddRecipe.bind(this)
@@ -30,7 +30,7 @@ class App extends Component {
         const copyRecipes = [recipe, ...this.state.recipes]
         this.setState({
             recipes: copyRecipes,
-            instructions: false
+            view: false
         })
     }
     async getRecipes(){
@@ -60,7 +60,7 @@ class App extends Component {
     }
 
     async toggleInstructions() {
-        this.setState({instructions: !this.state.instructions})
+        this.setState({view: !this.state.view})
     }
 
   render () {
@@ -81,8 +81,8 @@ class App extends Component {
                         </div>
                             <button onClick={this.toggleInstructions}>Get Instructions</button>
                             {
-                                this.state.instructions
-                                ? <h4>{recipe.description}</h4>
+                                this.state.view
+                                ? <h4>{recipe.instructions}</h4>
                                 : null
                             }
                         </li>
