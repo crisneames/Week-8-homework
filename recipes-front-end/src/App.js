@@ -96,6 +96,8 @@ class App extends Component {
     return (
       <div className="main-container">
         <h1>Recipes</h1>
+        <header>
+        </header>
         <Form handleAddRecipe={this.handleAddRecipe} recipes={this.state.recipes} baseUrl={baseUrl} />
         <ul>
             {
@@ -104,12 +106,12 @@ class App extends Component {
                         <li key={recipe._id} id={recipe._id}>
                         <div className="recipe-name">
                             <h2>{recipe.name}</h2>
-                            <h2>Category:
+                            <h3>Category:
                                 <span>
                                     {recipe.category}
                                 </span>
-                            </h2>
-                            <h2>Heathy:
+                            </h3>
+                            <h3>Heathy:
                                 <span>
                                     {
                                         recipe.healthy
@@ -117,8 +119,10 @@ class App extends Component {
                                         : 'No'
                                     }
                                 </span>
-                            </h2>
-                            <p onDoubleClick={() => {this.toggleHealthy(recipe)}}>Is This Unhealthy? Double Click to Change</p>
+                            </h3>
+                            <p onDoubleClick={() => {this.toggleHealthy(recipe)}}>Is This Unhealthy?
+                            <br />
+                             Double Click to Change</p>
                             <h4 id="delete" onClick={()=> {this.deleteRecipe(recipe._id)}}>X</h4>
                         </div>
                             <button onClick={() => this.getRecipe(recipe)} onDoubleClick={() => this.toggleInstructions(recipe)}>Get Instructions</button>
