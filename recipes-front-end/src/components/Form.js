@@ -7,7 +7,8 @@ class Form extends Component {
     this.state = {
       name: '',
       category: '',
-      instructions: ''
+      instructions: '',
+      healthy: true
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -20,7 +21,12 @@ class Form extends Component {
       try {
           let response = await fetch(this.props.baseUrl + '/recipes', {
               method: 'POST',
-              body: JSON.stringify({name: this.state.name, category: this.state.category, instructions: this.state.instructions}),
+              body: JSON.stringify({
+                  name: this.state.name,
+                  category: this.state.category,
+                  instructions: this.state.instructions,
+                  healthy: this.state.healthy
+               }),
               headers: {
                   'Content-Type': 'application/json'
               }
@@ -30,7 +36,8 @@ class Form extends Component {
             this.setState({
                 name: '',
                 category: '',
-                instructions: ''
+                instructions: '',
+                healthy: true
             })
       } catch (error) {
           console.error({'Error': error});
