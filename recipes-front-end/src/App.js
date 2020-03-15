@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Form from './components/Form.js'
+import Show from './components/Show.js'
 
 let baseUrl = ''
 
@@ -16,12 +17,14 @@ class App extends Component {
         super(props)
         this.state = {
             recipes: [],
-            view: false
+            view: false,
+            recipe: null
         }
         this.getRecipes = this.getRecipes.bind(this)
         this.handleAddRecipe = this.handleAddRecipe.bind(this)
         this.deleteRecipe = this.deleteRecipe.bind(this)
         this.toggleInstructions = this.toggleInstructions.bind(this)
+        this.getRecipe = this.getRecipe.bind(this)
     }
     componentDidMount(){
         this.getRecipes()
@@ -59,11 +62,16 @@ class App extends Component {
       }
     }
 
-    async toggleInstructions() {
-        this.setState({view: !this.state.view})
+      getRecipe (recipe){
+      this.setState ({recipe: recipe})
+    }
+
+    toggleInstructions(recipe) {
+        this.setState({recipe: !recipe})
     }
 
   render () {
+      console.log(this.state.recipe);
       console.log(this.state.recipes);
     return (
       <div className="main-container">
@@ -79,7 +87,7 @@ class App extends Component {
                             <h3>Category: {recipe.category}</h3>
                             <h4 id="delete" onClick={()=> {this.deleteRecipe(recipe._id)}}>X</h4>
                         </div>
-                            <button onClick={this.toggleInstructions}>Get Instructions</button>
+                            <button onClick={() => this.getRecipe(recipe)} onDoubleClick={() => this.toggleInstructions(recipe)}>Get Instructions</button>
                             {
                                 this.state.view
                                 ? <h4>{recipe.instructions}</h4>
@@ -90,6 +98,12 @@ class App extends Component {
                 })
             }
         </ul>
+        {
+          this.state.recipe
+          ? <Show recipe={this.state.recipe} />
+        : null
+        }
+
       </div>
     )
   }
