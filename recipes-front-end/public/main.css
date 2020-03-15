@@ -18,7 +18,8 @@
 
 h2 {
     display: flex;
-    align-items: flex-start;
+    justify-content: flex-start;
+    align-items: baseline;
     width: 30%;
 }
 
@@ -68,4 +69,11 @@ input[type="submit"] {
     cursor: pointer;
     color: #fff;
     border-radius: 5px;
+}
+
+span {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    font-size: 20px;
 }

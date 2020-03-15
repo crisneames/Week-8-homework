@@ -17,7 +17,6 @@ class App extends Component {
         super(props)
         this.state = {
             recipes: [],
-            view: false,
             recipe: null
         }
         this.getRecipes = this.getRecipes.bind(this)
@@ -25,6 +24,7 @@ class App extends Component {
         this.deleteRecipe = this.deleteRecipe.bind(this)
         this.toggleInstructions = this.toggleInstructions.bind(this)
         this.getRecipe = this.getRecipe.bind(this)
+        this.toggleHealthy = this.toggleHealthy.bind(this)
     }
     componentDidMount(){
         this.getRecipes()
@@ -33,7 +33,6 @@ class App extends Component {
         const copyRecipes = [recipe, ...this.state.recipes]
         this.setState({
             recipes: copyRecipes,
-            view: false
         })
     }
     async getRecipes(){
@@ -62,6 +61,27 @@ class App extends Component {
       }
     }
 
+    async toggleHealthy(recipe){
+        console.log(recipe)
+        try {
+            let response = await fetch(baseUrl + '/recipes/' + recipe._id, {
+                method: 'PUT',
+                body: JSON.stringify({healthy: !recipe.healthy}),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            let updatedRecipe = await response.json()
+            const foundRecipe = this.state.recipes.findIndex(foundItem => foundItem._id === recipe._id)
+            const copyRecipes = [...this.state.recipes]
+            copyRecipes[foundRecipe].healthy = updatedRecipe.healthy
+            console.log(updatedRecipe);
+            this.setState({recipes: copyRecipes})
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
       getRecipe (recipe){
       this.setState ({recipe: recipe})
     }
@@ -84,7 +104,21 @@ class App extends Component {
                         <li key={recipe._id} id={recipe._id}>
                         <div className="recipe-name">
                             <h2>{recipe.name}</h2>
-                            <h3>Category: {recipe.category}</h3>
+                            <h2>Category:
+                                <span>
+                                    {recipe.category}
+                                </span>
+                            </h2>
+                            <h2>Heathy:
+                                <span>
+                                    {
+                                        recipe.healthy
+                                        ? 'Yes'
+                                        : 'No'
+                                    }
+                                </span>
+                            </h2>
+                            <p onDoubleClick={() => {this.toggleHealthy(recipe)}}>Is This Unhealthy? Double Click to Change</p>
                             <h4 id="delete" onClick={()=> {this.deleteRecipe(recipe._id)}}>X</h4>
                         </div>
                             <button onClick={() => this.getRecipe(recipe)} onDoubleClick={() => this.toggleInstructions(recipe)}>Get Instructions</button>
