@@ -5,16 +5,18 @@
 
 body {
   font-family: 'EB Garamond', serif;
-  background-color: #f1f1f1;
-  color: rgb(51 55 65);
-
-
-  }
+}
 header {
-  background-image: https://www.medallionbank.com/wp-content/uploads/2019/04/aspen-caribbean-feast-2018-01.jpg;
-  overflow: hidden;
-  background-color: rgb(79 161 193);
-  padding: 10px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    background-image: url(https://www.medallionbank.com/wp-content/uploads/2019/04/aspen-caribbean-feast-2018-01.jpg);
+    background-size: cover;
+    color: #fff;
+    text-shadow: 1px 1px 0 black,
+                -1px 1px 0 black,
+                1px -1px 0 black,
+                -1px -1px 0 black;
 }
 
 .main-container {
@@ -31,40 +33,77 @@ header {
 }
 
 h1 {
+    font-size: 50px;
+}
 
-
+.instructions {
+    background: gainsboro;
+    width: 25%;
+    position: fixed;
+    top: 10em;
+    right: 0;
+    z-index: 1;
+    padding: 1em 1em 0;
+    border-radius: 10px  0 0 10px ;
+    width: 30%;
+    margin: 0;
 }
 
 h2 {
     display: flex;
     align-items: flex-start;
-    width: 30%;
 }
 
 h3 {
     display: flex;
     align-items: flex-start;
-    width: 30%;
+    width: 100%;
+    margin: 0;
 }
 
 ul {
     padding-left: 0;
+    width: 60%;
+    margin: 0;
 }
 
 li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     border-bottom: 1px solid black;
     list-style: none;
+    width: 90%;
+}
+
+.recipe-name {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+p {
+    text-align: left;
+    font-size: 16px;
+    border: 1px solid gainsboro;
+    padding: 4px;
+    border-radius: 7px;
+    background-color: #0ea3c4;
+    color: #fff;
+    box-shadow: 2px 2px 3px gainsboro;
+    cursor: pointer;
 }
 
 button {
     margin-bottom: 10px;
     width: 25%;
-    height: 35px;
+    height: 40px;
     background: #0ea3c4;
     color: #fff;
     cursor: pointer;
     border-radius: 7px;
     font-size: 15px;
+    box-shadow: 2px 2px 3px gainsboro;
 }
 
 input[type="submit"] {
@@ -75,6 +114,7 @@ input[type="submit"] {
     cursor: pointer;
     border-radius: 7px;
     font-size: 12px;
+    box-shadow: 2px 2px 3px gainsboro;
 }
 
 #delete {
@@ -93,17 +133,31 @@ form {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  padding: 10px 0;
+  border-bottom: 1px solid black;
 }
 
 input {
   width: 30%;
-  margin: 10px 0;
+  height: 30px;
+  margin-top: 10px;
+  border: 1px solid grey;
+  border-radius: 5px;
+  background-color: #e3eeff;
 }
 
 #instructions {
-  height: 250px;
-  max-height: 250px;
-  width: 75%;
+  width: 60%;
   max-width: 75%;
   overflow: scroll;
+  margin-top: 10px;
+  border: 1px solid grey;
+  border-radius: 5px;
+  background-color: #e3eeff;
+}
+
+span {
+    font-size: 20px;
+    font-weight: 400;
+    margin-left: 20px;
 }

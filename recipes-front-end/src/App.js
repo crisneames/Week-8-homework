@@ -95,52 +95,49 @@ class App extends Component {
       console.log(this.state.recipes);
     return (
       <div className="main-container">
-        <h1>Recipes</h1>
         <header>
+            <h1>Recipes</h1>
         </header>
         <Form handleAddRecipe={this.handleAddRecipe} recipes={this.state.recipes} baseUrl={baseUrl} />
-        <ul>
+        <div className="recipes-display">
+            <ul>
+                {
+                    this.state.recipes.map(recipe => {
+                        return (
+                            <li key={recipe._id} id={recipe._id}>
+                            <div className="recipe-name">
+                                <h2>{recipe.name}</h2>
+                                <h3>Category:
+                                    <span>
+                                        {recipe.category}
+                                    </span>
+                                </h3>
+                                <h3>Heathy:
+                                    <span>
+                                        {
+                                            recipe.healthy
+                                            ? 'Yes'
+                                            : 'No'
+                                        }
+                                    </span>
+                                </h3>
+                                <p onClick={() => {this.toggleHealthy(recipe)}}>Change Heathy Status
+                                </p>
+                                <h4 id="delete" onClick={()=> {this.deleteRecipe(recipe._id)}}>X</h4>
+                            </div>
+                                <button onClick={() => this.getRecipe(recipe)} onDoubleClick={() => this.toggleInstructions(recipe)}>Get Instructions</button>
+                            </li>
+                        )
+                    })
+                }
+            </ul>
+
             {
-                this.state.recipes.map(recipe => {
-                    return (
-                        <li key={recipe._id} id={recipe._id}>
-                        <div className="recipe-name">
-                            <h2>{recipe.name}</h2>
-                            <h3>Category:
-                                <span>
-                                    {recipe.category}
-                                </span>
-                            </h3>
-                            <h3>Heathy:
-                                <span>
-                                    {
-                                        recipe.healthy
-                                        ? 'Yes'
-                                        : 'No'
-                                    }
-                                </span>
-                            </h3>
-                            <p onDoubleClick={() => {this.toggleHealthy(recipe)}}>Is This Unhealthy?
-                            <br />
-                             Double Click to Change</p>
-                            <h4 id="delete" onClick={()=> {this.deleteRecipe(recipe._id)}}>X</h4>
-                        </div>
-                            <button onClick={() => this.getRecipe(recipe)} onDoubleClick={() => this.toggleInstructions(recipe)}>Get Instructions</button>
-                            {
-                                this.state.view
-                                ? <h4>{recipe.instructions}</h4>
-                                : null
-                            }
-                        </li>
-                    )
-                })
+              this.state.recipe
+              ? <Show recipe={this.state.recipe} />
+            : null
             }
-        </ul>
-        {
-          this.state.recipe
-          ? <Show recipe={this.state.recipe} />
-        : null
-        }
+        </div>
 
       </div>
     )

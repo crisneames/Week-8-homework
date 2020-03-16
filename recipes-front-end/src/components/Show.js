@@ -3,10 +3,10 @@ import React, {Component} from 'react';
 class Show extends Component {
   render () {
     return (
-      <div>
+      <div className="instructions">
         <h3>Instructions</h3>
-        <p>{this.props.recipe.name}</p>
-        <p>{this.props.recipe.instructions}</p>
+        <h5>{this.props.recipe.name}</h5>
+        <h5>{this.props.recipe.instructions}</h5>
       </div>
 
 
