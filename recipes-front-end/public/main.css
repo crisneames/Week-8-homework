@@ -3,6 +3,20 @@
     /* border: 1px solid black; */
 }
 
+body {
+  font-family: 'EB Garamond', serif;
+  background-color: #f1f1f1;
+  color: rgb(51 55 65);
+
+
+  }
+header {
+  background-image: https://www.medallionbank.com/wp-content/uploads/2019/04/aspen-caribbean-feast-2018-01.jpg;
+  overflow: hidden;
+  background-color: rgb(79 161 193);
+  padding: 10px;
+}
+
 .main-container {
     width: 90%;
     margin: auto;
@@ -16,10 +30,14 @@
     margin: 5px;
 }
 
+h1 {
+
+
+}
+
 h2 {
     display: flex;
-    justify-content: flex-start;
-    align-items: baseline;
+    align-items: flex-start;
     width: 30%;
 }
 
@@ -71,9 +89,21 @@ input[type="submit"] {
     border-radius: 5px;
 }
 
-span {
-    display: flex;
-    justify-content: center;
-    align-items: baseline;
-    font-size: 20px;
+form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+input {
+  width: 30%;
+  margin: 10px 0;
+}
+
+#instructions {
+  height: 250px;
+  max-height: 250px;
+  width: 75%;
+  max-width: 75%;
+  overflow: scroll;
 }
